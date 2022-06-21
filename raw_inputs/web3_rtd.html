@@ -1,0 +1,835 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Web3 &mdash; web3.js 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://assets.readthedocs.org/static/javascript/readthedocs-doc-embed.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="web3.eth" href="web3-eth.html" />
+    <link rel="prev" title="Glossary" href="glossary.html" /> 
+
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="https://assets.readthedocs.org/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "build_date": "2022-04-12T12:13:58Z", "builder": "sphinx", "canonical_url": null, "commit": "f9bcad8a", "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "web3", "programming_language": "js", "project": "web3js", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "sphinx_rtd_theme", "user_analytics_code": "", "version": "v1.7.3"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="https://assets.readthedocs.org/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> web3.js
+          
+
+          
+          </a>
+
+          
+            
+            
+            
+              <div class="version">
+                v1.7.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">User Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="callbacks-promises-events.html">Callbacks Promises Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Web3</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#web3-modules">Web3.modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#returns">Returns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#web3-instance">Web3 Instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#version">version</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Returns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#utils">utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setprovider">setProvider</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Returns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-local-geth-node">Example: Local Geth Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-remote-node-provider">Example: Remote Node Provider</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#providers">providers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#value">Value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration">Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#givenprovider">givenProvider</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Returns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#currentprovider">currentProvider</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Returns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#batchrequest">BatchRequest</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id9">Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">Returns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#extend">extend</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id12">Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">Returns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="web3-eth.html">web3.eth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web3-eth-subscribe.html">web3.eth.subscribe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web3-eth-contract.html">web3.eth.Contract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web3-eth-accounts.html">web3.eth.accounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web3-eth-personal.html">web3.eth.personal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web3-eth-ens.html">web3.eth.ens</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web3-eth-iban.html">web3.eth.Iban</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web3-eth-abi.html">web3.eth.abi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web3-net.html">web3.*.net</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web3-bzz.html">web3.bzz</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web3-shh.html">web3.shh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web3-utils.html">web3.utils</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">web3.js</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Web3</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/ethereum/web3.js/blob/v1.7.3/docs/web3.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="web3">
+<h1>Web3<a class="headerlink" href="#web3" title="Permalink to this headline">¶</a></h1>
+<p>This is the main (or ‘umbrella’) class of the web3.js library.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">Web3</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;web3&#39;</span><span class="p">);</span>
+
+<span class="o">&gt;</span> <span class="nx">Web3</span><span class="p">.</span><span class="nx">utils</span>
+<span class="o">&gt;</span> <span class="nx">Web3</span><span class="p">.</span><span class="nx">version</span>
+<span class="o">&gt;</span> <span class="nx">Web3</span><span class="p">.</span><span class="nx">givenProvider</span>
+<span class="o">&gt;</span> <span class="nx">Web3</span><span class="p">.</span><span class="nx">providers</span>
+<span class="o">&gt;</span> <span class="nx">Web3</span><span class="p">.</span><span class="nx">modules</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="section" id="web3-modules">
+<h2>Web3.modules<a class="headerlink" href="#web3-modules" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">Web3</span><span class="p">.</span><span class="nx">modules</span>
+</pre></div>
+</div>
+<p>Will return an object with the classes of all major sub modules, to be able to instantiate them manually.</p>
+<div class="section" id="returns">
+<h3>Returns<a class="headerlink" href="#returns" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Object</span></code>: A list of module constructors:</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">Eth</span></code> - <code class="docutils literal notranslate"><span class="pre">Constructor</span></code>: The Eth module for interacting with the Ethereum network (<a class="reference internal" href="web3-eth.html#eth"><span class="std std-ref">web3.eth</span></a>).</li>
+<li><code class="docutils literal notranslate"><span class="pre">Net</span></code> - <code class="docutils literal notranslate"><span class="pre">Constructor</span></code>: The Net module for interacting with network properties (<a class="reference internal" href="web3-eth-net.html#eth-net"><span class="std std-ref">web3.eth.net</span></a>).</li>
+<li><code class="docutils literal notranslate"><span class="pre">Personal</span></code> - <code class="docutils literal notranslate"><span class="pre">Constructor</span></code>: The Personal module for interacting with the Ethereum accounts (<span class="xref std std-ref">web3.eth.personal</span>).</li>
+<li><code class="docutils literal notranslate"><span class="pre">Shh</span></code> - <code class="docutils literal notranslate"><span class="pre">Constructor</span></code>: The Shh module for interacting with the whisper protocol (<a class="reference internal" href="web3-shh.html#shh"><span class="std std-ref">web3.shh</span></a>).</li>
+<li><code class="docutils literal notranslate"><span class="pre">Bzz</span></code> - <code class="docutils literal notranslate"><span class="pre">Constructor</span></code>: The Bzz module for interacting with the swarm network (<a class="reference internal" href="web3-bzz.html#bzz"><span class="std std-ref">web3.bzz</span></a>).</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">Web3</span><span class="p">.</span><span class="nx">modules</span>
+<span class="o">&gt;</span> <span class="p">{</span>
+    <span class="nx">Eth</span><span class="o">:</span> <span class="nx">Eth</span><span class="p">(</span><span class="nx">provider</span><span class="p">),</span>
+    <span class="nx">Net</span><span class="o">:</span> <span class="nx">Net</span><span class="p">(</span><span class="nx">provider</span><span class="p">),</span>
+    <span class="nx">Personal</span><span class="o">:</span> <span class="nx">Personal</span><span class="p">(</span><span class="nx">provider</span><span class="p">),</span>
+    <span class="nx">Shh</span><span class="o">:</span> <span class="nx">Shh</span><span class="p">(</span><span class="nx">provider</span><span class="p">),</span>
+    <span class="nx">Bzz</span><span class="o">:</span> <span class="nx">Bzz</span><span class="p">(</span><span class="nx">provider</span><span class="p">),</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="web3-instance">
+<h2>Web3 Instance<a class="headerlink" href="#web3-instance" title="Permalink to this headline">¶</a></h2>
+<p>The Web3 class is an umbrella package to house all Ethereum related modules.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">Web3</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;web3&#39;</span><span class="p">);</span>
+
+<span class="c1">// &quot;Web3.givenProvider&quot; will be set if in an Ethereum supported browser.</span>
+<span class="kd">var</span> <span class="nx">web3</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Web3</span><span class="p">(</span><span class="nx">Web3</span><span class="p">.</span><span class="nx">givenProvider</span> <span class="o">||</span> <span class="s1">&#39;ws://some.local-or-remote.node:8546&#39;</span><span class="p">);</span>
+
+<span class="o">&gt;</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span>
+<span class="o">&gt;</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">shh</span>
+<span class="o">&gt;</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">bzz</span>
+<span class="o">&gt;</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">utils</span>
+<span class="o">&gt;</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">version</span>
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="version">
+<h2>version<a class="headerlink" href="#version" title="Permalink to this headline">¶</a></h2>
+<p>Static accessible property of the Web3 class and property of the instance as well.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">Web3</span><span class="p">.</span><span class="nx">version</span>
+<span class="nx">web3</span><span class="p">.</span><span class="nx">version</span>
+</pre></div>
+</div>
+<p>Contains the current package version of the web3.js library.</p>
+<div class="section" id="id1">
+<h3>Returns<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">String</span></code>: The current version.</p>
+</div>
+<div class="section" id="id2">
+<h3>Example<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">web3</span><span class="p">.</span><span class="nx">version</span><span class="p">;</span>
+<span class="o">&gt;</span> <span class="s2">&quot;1.2.3&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="utils">
+<h2>utils<a class="headerlink" href="#utils" title="Permalink to this headline">¶</a></h2>
+<p>Static accessible property of the Web3 class and property of the instance as well.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">Web3</span><span class="p">.</span><span class="nx">utils</span>
+<span class="nx">web3</span><span class="p">.</span><span class="nx">utils</span>
+</pre></div>
+</div>
+<p>Utility functions are also exposes on the <code class="docutils literal notranslate"><span class="pre">Web3</span></code> class object directly.</p>
+<p>See <a class="reference internal" href="web3-utils.html#utils"><span class="std std-ref">web3.utils</span></a> for more.</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="setprovider">
+<h2>setProvider<a class="headerlink" href="#setprovider" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">web3</span><span class="p">.</span><span class="nx">setProvider</span><span class="p">(</span><span class="nx">myProvider</span><span class="p">)</span>
+<span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">setProvider</span><span class="p">(</span><span class="nx">myProvider</span><span class="p">)</span>
+<span class="nx">web3</span><span class="p">.</span><span class="nx">shh</span><span class="p">.</span><span class="nx">setProvider</span><span class="p">(</span><span class="nx">myProvider</span><span class="p">)</span>
+<span class="nx">web3</span><span class="p">.</span><span class="nx">bzz</span><span class="p">.</span><span class="nx">setProvider</span><span class="p">(</span><span class="nx">myProvider</span><span class="p">)</span>
+<span class="p">...</span>
+</pre></div>
+</div>
+<p>Will change the provider for its module.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When called on the umbrella package <code class="docutils literal notranslate"><span class="pre">web3</span></code> it will also set the provider for all sub modules <code class="docutils literal notranslate"><span class="pre">web3.eth</span></code>, <code class="docutils literal notranslate"><span class="pre">web3.shh</span></code>, etc. EXCEPT <code class="docutils literal notranslate"><span class="pre">web3.bzz</span></code> which needs a separate provider at all times.</p>
+</div>
+<div class="section" id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><code class="docutils literal notranslate"><span class="pre">Object</span></code> - <code class="docutils literal notranslate"><span class="pre">myProvider</span></code>: <span class="xref std std-ref">a valid provider</span>.</li>
+</ol>
+</div>
+<div class="section" id="id3">
+<h3>Returns<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Boolean</span></code></p>
+</div>
+<div class="section" id="example-local-geth-node">
+<h3>Example: Local Geth Node<a class="headerlink" href="#example-local-geth-node" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">Web3</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;web3&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">web3</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Web3</span><span class="p">(</span><span class="s1">&#39;http://localhost:8545&#39;</span><span class="p">);</span>
+<span class="c1">// or</span>
+<span class="kd">var</span> <span class="nx">web3</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Web3</span><span class="p">(</span><span class="k">new</span> <span class="nx">Web3</span><span class="p">.</span><span class="nx">providers</span><span class="p">.</span><span class="nx">HttpProvider</span><span class="p">(</span><span class="s1">&#39;http://localhost:8545&#39;</span><span class="p">));</span>
+
+<span class="c1">// change provider</span>
+<span class="nx">web3</span><span class="p">.</span><span class="nx">setProvider</span><span class="p">(</span><span class="s1">&#39;ws://localhost:8546&#39;</span><span class="p">);</span>
+<span class="c1">// or</span>
+<span class="nx">web3</span><span class="p">.</span><span class="nx">setProvider</span><span class="p">(</span><span class="k">new</span> <span class="nx">Web3</span><span class="p">.</span><span class="nx">providers</span><span class="p">.</span><span class="nx">WebsocketProvider</span><span class="p">(</span><span class="s1">&#39;ws://localhost:8546&#39;</span><span class="p">));</span>
+
+<span class="c1">// Using the IPC provider in node.js</span>
+<span class="kd">var</span> <span class="nx">net</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;net&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">web3</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Web3</span><span class="p">(</span><span class="s1">&#39;/Users/myuser/Library/Ethereum/geth.ipc&#39;</span><span class="p">,</span> <span class="nx">net</span><span class="p">);</span> <span class="c1">// mac os path</span>
+<span class="c1">// or</span>
+<span class="kd">var</span> <span class="nx">web3</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Web3</span><span class="p">(</span><span class="k">new</span> <span class="nx">Web3</span><span class="p">.</span><span class="nx">providers</span><span class="p">.</span><span class="nx">IpcProvider</span><span class="p">(</span><span class="s1">&#39;/Users/myuser/Library/Ethereum/geth.ipc&#39;</span><span class="p">,</span> <span class="nx">net</span><span class="p">));</span> <span class="c1">// mac os path</span>
+<span class="c1">// on windows the path is: &quot;\\\\.\\pipe\\geth.ipc&quot;</span>
+<span class="c1">// on linux the path is: &quot;/users/myuser/.ethereum/geth.ipc&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-remote-node-provider">
+<h3>Example: Remote Node Provider<a class="headerlink" href="#example-remote-node-provider" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// Using a remote node provider, like Alchemy (https://www.alchemyapi.io/supernode), is simple.</span>
+<span class="kd">var</span> <span class="nx">Web3</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;web3&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">web3</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Web3</span><span class="p">(</span><span class="s2">&quot;https://eth-mainnet.alchemyapi.io/v2/your-api-key&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="providers">
+<h2>providers<a class="headerlink" href="#providers" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">web3</span><span class="p">.</span><span class="nx">providers</span>
+<span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">providers</span>
+<span class="nx">web3</span><span class="p">.</span><span class="nx">shh</span><span class="p">.</span><span class="nx">providers</span>
+<span class="nx">web3</span><span class="p">.</span><span class="nx">bzz</span><span class="p">.</span><span class="nx">providers</span>
+<span class="p">...</span>
+</pre></div>
+</div>
+<p>Contains the current available <span class="xref std std-ref">providers</span>.</p>
+<div class="section" id="value">
+<h3>Value<a class="headerlink" href="#value" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Object</span></code> with the following providers:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">Object</span></code> - <code class="docutils literal notranslate"><span class="pre">HttpProvider</span></code>: HTTP provider, does not support subscriptions.</li>
+<li><code class="docutils literal notranslate"><span class="pre">Object</span></code> - <code class="docutils literal notranslate"><span class="pre">WebsocketProvider</span></code>: The Websocket provider is the standard for usage in legacy browsers.</li>
+<li><code class="docutils literal notranslate"><span class="pre">Object</span></code> - <code class="docutils literal notranslate"><span class="pre">IpcProvider</span></code>: The IPC provider is used node.js dapps when running a local node. Gives the most secure connection.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id4">
+<h3>Example<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">Web3</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;web3&#39;</span><span class="p">);</span>
+<span class="c1">// use the given Provider, e.g in Mist, or instantiate a new websocket provider</span>
+<span class="kd">var</span> <span class="nx">web3</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Web3</span><span class="p">(</span><span class="nx">Web3</span><span class="p">.</span><span class="nx">givenProvider</span> <span class="o">||</span> <span class="s1">&#39;ws://remotenode.com:8546&#39;</span><span class="p">);</span>
+<span class="c1">// or</span>
+<span class="kd">var</span> <span class="nx">web3</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Web3</span><span class="p">(</span><span class="nx">Web3</span><span class="p">.</span><span class="nx">givenProvider</span> <span class="o">||</span> <span class="k">new</span> <span class="nx">Web3</span><span class="p">.</span><span class="nx">providers</span><span class="p">.</span><span class="nx">WebsocketProvider</span><span class="p">(</span><span class="s1">&#39;ws://remotenode.com:8546&#39;</span><span class="p">));</span>
+
+<span class="c1">// Using the IPC provider in node.js</span>
+<span class="kd">var</span> <span class="nx">net</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;net&#39;</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">web3</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Web3</span><span class="p">(</span><span class="s1">&#39;/Users/myuser/Library/Ethereum/geth.ipc&#39;</span><span class="p">,</span> <span class="nx">net</span><span class="p">);</span> <span class="c1">// mac os path</span>
+<span class="c1">// or</span>
+<span class="kd">var</span> <span class="nx">web3</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Web3</span><span class="p">(</span><span class="k">new</span> <span class="nx">Web3</span><span class="p">.</span><span class="nx">providers</span><span class="p">.</span><span class="nx">IpcProvider</span><span class="p">(</span><span class="s1">&#39;/Users/myuser/Library/Ethereum/geth.ipc&#39;</span><span class="p">,</span> <span class="nx">net</span><span class="p">));</span> <span class="c1">// mac os path</span>
+<span class="c1">// on windows the path is: &quot;\\\\.\\pipe\\geth.ipc&quot;</span>
+<span class="c1">// on linux the path is: &quot;/users/myuser/.ethereum/geth.ipc&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="configuration">
+<h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// ====</span>
+<span class="c1">// Http</span>
+<span class="c1">// ====</span>
+
+<span class="kd">var</span> <span class="nx">Web3HttpProvider</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;web3-providers-http&#39;</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">keepAlive</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">withCredentials</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">timeout</span><span class="o">:</span> <span class="mi">20000</span><span class="p">,</span> <span class="c1">// ms</span>
+    <span class="nx">headers</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Access-Control-Allow-Origin&#39;</span><span class="p">,</span>
+            <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;*&#39;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="p">...</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="nx">agent</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">http</span><span class="o">:</span> <span class="nx">http</span><span class="p">.</span><span class="nx">Agent</span><span class="p">(...),</span>
+        <span class="nx">baseUrl</span><span class="o">:</span> <span class="s1">&#39;&#39;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">provider</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Web3HttpProvider</span><span class="p">(</span><span class="s1">&#39;http://localhost:8545&#39;</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+
+<span class="c1">// ==========</span>
+<span class="c1">// Websockets</span>
+<span class="c1">// ==========</span>
+
+<span class="kd">var</span> <span class="nx">Web3WsProvider</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;web3-providers-ws&#39;</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">timeout</span><span class="o">:</span> <span class="mi">30000</span><span class="p">,</span> <span class="c1">// ms</span>
+
+    <span class="c1">// Useful for credentialed urls, e.g: ws://username:password@localhost:8546</span>
+    <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">authorization</span><span class="o">:</span> <span class="s1">&#39;Basic username:password&#39;</span>
+    <span class="p">},</span>
+
+    <span class="nx">clientConfig</span><span class="o">:</span> <span class="p">{</span>
+      <span class="c1">// Useful if requests are large</span>
+      <span class="nx">maxReceivedFrameSize</span><span class="o">:</span> <span class="mi">100000000</span><span class="p">,</span>   <span class="c1">// bytes - default: 1MiB</span>
+      <span class="nx">maxReceivedMessageSize</span><span class="o">:</span> <span class="mi">100000000</span><span class="p">,</span> <span class="c1">// bytes - default: 8MiB</span>
+
+      <span class="c1">// Useful to keep a connection alive</span>
+      <span class="nx">keepalive</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="nx">keepaliveInterval</span><span class="o">:</span> <span class="mi">60000</span> <span class="c1">// ms</span>
+    <span class="p">},</span>
+
+    <span class="c1">// Enable auto reconnection</span>
+    <span class="nx">reconnect</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">auto</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nx">delay</span><span class="o">:</span> <span class="mi">5000</span><span class="p">,</span> <span class="c1">// ms</span>
+        <span class="nx">maxAttempts</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="nx">onTimeout</span><span class="o">:</span> <span class="kc">false</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">ws</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Web3WsProvider</span><span class="p">(</span><span class="s1">&#39;ws://localhost:8546&#39;</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>More information for the Http and Websocket provider modules can be found here:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="https://github.com/ethereum/web3.js/tree/1.x/packages/web3-providers-http#usage">HttpProvider</a></li>
+<li><a class="reference external" href="https://github.com/ethereum/web3.js/tree/1.x/packages/web3-providers-ws#usage">WebsocketProvider</a></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="givenprovider">
+<h2>givenProvider<a class="headerlink" href="#givenprovider" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">web3</span><span class="p">.</span><span class="nx">givenProvider</span>
+<span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">givenProvider</span>
+<span class="nx">web3</span><span class="p">.</span><span class="nx">shh</span><span class="p">.</span><span class="nx">givenProvider</span>
+<span class="nx">web3</span><span class="p">.</span><span class="nx">bzz</span><span class="p">.</span><span class="nx">givenProvider</span>
+<span class="p">...</span>
+</pre></div>
+</div>
+<p>When using web3.js in an Ethereum compatible browser, it will set with the current native provider by that browser.
+Will return the given provider by the (browser) environment, otherwise <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
+<div class="section" id="id5">
+<h3>Returns<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Object</span></code>: The given provider set or <code class="docutils literal notranslate"><span class="pre">null</span></code>;</p>
+</div>
+<div class="section" id="id6">
+<h3>Example<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="currentprovider">
+<h2>currentProvider<a class="headerlink" href="#currentprovider" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">web3</span><span class="p">.</span><span class="nx">currentProvider</span>
+<span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">currentProvider</span>
+<span class="nx">web3</span><span class="p">.</span><span class="nx">shh</span><span class="p">.</span><span class="nx">currentProvider</span>
+<span class="nx">web3</span><span class="p">.</span><span class="nx">bzz</span><span class="p">.</span><span class="nx">currentProvider</span>
+<span class="p">...</span>
+</pre></div>
+</div>
+<p>Will return the current provider, otherwise <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
+<div class="section" id="id7">
+<h3>Returns<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Object</span></code>: The current provider set or <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
+</div>
+<div class="section" id="id8">
+<h3>Example<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="batchrequest">
+<h2>BatchRequest<a class="headerlink" href="#batchrequest" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">new</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">BatchRequest</span><span class="p">()</span>
+<span class="k">new</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">BatchRequest</span><span class="p">()</span>
+<span class="k">new</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">shh</span><span class="p">.</span><span class="nx">BatchRequest</span><span class="p">()</span>
+<span class="k">new</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">bzz</span><span class="p">.</span><span class="nx">BatchRequest</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Class to create and execute batch requests.</p>
+<div class="section" id="id9">
+<h3>Parameters<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<p>none</p>
+</div>
+<div class="section" id="id10">
+<h3>Returns<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Object</span></code>: With the following methods:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">add(request)</span></code>: To add a request object to the batch call.</li>
+<li><code class="docutils literal notranslate"><span class="pre">execute()</span></code>: Will execute the batch request.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id11">
+<h3>Example<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">contract</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">Contract</span><span class="p">(</span><span class="nx">abi</span><span class="p">,</span> <span class="nx">address</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">batch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">BatchRequest</span><span class="p">();</span>
+<span class="nx">batch</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">getBalance</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="s1">&#39;0x0000000000000000000000000000000000000000&#39;</span><span class="p">,</span> <span class="s1">&#39;latest&#39;</span><span class="p">,</span> <span class="nx">callback</span><span class="p">));</span>
+<span class="nx">batch</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">contract</span><span class="p">.</span><span class="nx">methods</span><span class="p">.</span><span class="nx">balance</span><span class="p">(</span><span class="nx">address</span><span class="p">).</span><span class="nx">call</span><span class="p">.</span><span class="nx">request</span><span class="p">({</span><span class="nx">from</span><span class="o">:</span> <span class="s1">&#39;0x0000000000000000000000000000000000000000&#39;</span><span class="p">},</span> <span class="nx">callback2</span><span class="p">));</span>
+<span class="nx">batch</span><span class="p">.</span><span class="nx">execute</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="extend">
+<h2>extend<a class="headerlink" href="#extend" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">web3</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">methods</span><span class="p">)</span>
+<span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">methods</span><span class="p">)</span>
+<span class="nx">web3</span><span class="p">.</span><span class="nx">shh</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">methods</span><span class="p">)</span>
+<span class="nx">web3</span><span class="p">.</span><span class="nx">bzz</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">methods</span><span class="p">)</span>
+<span class="p">...</span>
+</pre></div>
+</div>
+<p>Allows extending the web3 modules.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You also have <code class="docutils literal notranslate"><span class="pre">*.extend.formatters</span></code> as additional formatter functions to be used for input and output formatting. Please see the <a class="reference external" href="https://github.com/ethereum/web3.js/blob/1.x/packages/web3-core-helpers/src/formatters.js">source file</a> for function details.</p>
+</div>
+<div class="section" id="id12">
+<h3>Parameters<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">methods</span></code> - <code class="docutils literal notranslate"><span class="pre">Object</span></code>: Extension object with array of methods description objects as follows:</dt>
+<dd><ul class="first last">
+<li><code class="docutils literal notranslate"><span class="pre">property</span></code> - <code class="docutils literal notranslate"><span class="pre">String</span></code>: (optional) The name of the property to add to the module. If no property is set it will be added to the module directly.</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">methods</span></code> - <code class="docutils literal notranslate"><span class="pre">Array</span></code>: The array of method descriptions:</dt>
+<dd><ul class="first last">
+<li><code class="docutils literal notranslate"><span class="pre">name</span></code> - <code class="docutils literal notranslate"><span class="pre">String</span></code>: Name of the method to add.</li>
+<li><code class="docutils literal notranslate"><span class="pre">call</span></code> - <code class="docutils literal notranslate"><span class="pre">String</span></code>: The RPC method name.</li>
+<li><code class="docutils literal notranslate"><span class="pre">params</span></code> - <code class="docutils literal notranslate"><span class="pre">Number</span></code>: (optional) The number of parameters for that function. Default 0.</li>
+<li><code class="docutils literal notranslate"><span class="pre">inputFormatter</span></code> - <code class="docutils literal notranslate"><span class="pre">Array</span></code>: (optional) Array of inputformatter functions. Each array item responds to a function parameter, so if you want some parameters not to be formatted, add a <code class="docutils literal notranslate"><span class="pre">null</span></code> instead.</li>
+<li><code class="docutils literal notranslate"><span class="pre">outputFormatter</span> <span class="pre">-</span> <span class="pre">``Function</span></code>: (optional) Can be used to format the output of the method.</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+<div class="section" id="id13">
+<h3>Returns<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Object</span></code>: The extended module.</p>
+</div>
+<div class="section" id="id14">
+<h3>Example<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">web3</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+    <span class="nx">property</span><span class="o">:</span> <span class="s1">&#39;myModule&#39;</span><span class="p">,</span>
+    <span class="nx">methods</span><span class="o">:</span> <span class="p">[{</span>
+        <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;getBalance&#39;</span><span class="p">,</span>
+        <span class="nx">call</span><span class="o">:</span> <span class="s1">&#39;eth_getBalance&#39;</span><span class="p">,</span>
+        <span class="nx">params</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="nx">inputFormatter</span><span class="o">:</span> <span class="p">[</span><span class="nx">web3</span><span class="p">.</span><span class="nx">extend</span><span class="p">.</span><span class="nx">formatters</span><span class="p">.</span><span class="nx">inputAddressFormatter</span><span class="p">,</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">extend</span><span class="p">.</span><span class="nx">formatters</span><span class="p">.</span><span class="nx">inputDefaultBlockNumberFormatter</span><span class="p">],</span>
+        <span class="nx">outputFormatter</span><span class="o">:</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">utils</span><span class="p">.</span><span class="nx">hexToNumberString</span>
+    <span class="p">},{</span>
+        <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;getGasPriceSuperFunction&#39;</span><span class="p">,</span>
+        <span class="nx">call</span><span class="o">:</span> <span class="s1">&#39;eth_gasPriceSuper&#39;</span><span class="p">,</span>
+        <span class="nx">params</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="nx">inputFormatter</span><span class="o">:</span> <span class="p">[</span><span class="kc">null</span><span class="p">,</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">utils</span><span class="p">.</span><span class="nx">numberToHex</span><span class="p">]</span>
+    <span class="p">}]</span>
+<span class="p">});</span>
+
+<span class="nx">web3</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+    <span class="nx">methods</span><span class="o">:</span> <span class="p">[{</span>
+        <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;directCall&#39;</span><span class="p">,</span>
+        <span class="nx">call</span><span class="o">:</span> <span class="s1">&#39;eth_callForFun&#39;</span><span class="p">,</span>
+    <span class="p">}]</span>
+<span class="p">});</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">web3</span><span class="p">);</span>
+<span class="o">&gt;</span> <span class="nx">Web3</span> <span class="p">{</span>
+    <span class="nx">myModule</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">getBalance</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){},</span>
+        <span class="nx">getGasPriceSuperFunction</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){}</span>
+    <span class="p">},</span>
+    <span class="nx">directCall</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){},</span>
+    <span class="nx">eth</span><span class="o">:</span> <span class="nx">Eth</span> <span class="p">{...},</span>
+    <span class="nx">bzz</span><span class="o">:</span> <span class="nx">Bzz</span> <span class="p">{...},</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<hr class="docutils" />
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="web3-eth.html" class="btn btn-neutral float-right" title="web3.eth" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="glossary.html" class="btn btn-neutral float-left" title="Glossary" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Ethereum
+      
+        <span class="commit">
+          Revision <code>f9bcad8a</code>.
+        </span>
+      
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: v1.7.3
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Versions</dt>
+        
+          <dd><a href="/en/v3.0.0-rc.5/">v3.0.0-rc.5</a></dd>
+        
+          <dd><a href="/en/v1.7.3/">v1.7.3</a></dd>
+        
+          <dd><a href="/en/v1.7.1/">v1.7.1</a></dd>
+        
+          <dd><a href="/en/v1.7.0/">v1.7.0</a></dd>
+        
+          <dd><a href="/en/v1.6.1/">v1.6.1</a></dd>
+        
+          <dd><a href="/en/v1.6.0/">v1.6.0</a></dd>
+        
+          <dd><a href="/en/v1.5.3/">v1.5.3</a></dd>
+        
+          <dd><a href="/en/v1.5.2/">v1.5.2</a></dd>
+        
+          <dd><a href="/en/v1.5.0/">v1.5.0</a></dd>
+        
+          <dd><a href="/en/v1.5.0-rc.0/">v1.5.0-rc.0</a></dd>
+        
+          <dd><a href="/en/v1.4.0/">v1.4.0</a></dd>
+        
+          <dd><a href="/en/v1.3.6/">v1.3.6</a></dd>
+        
+          <dd><a href="/en/v1.3.5/">v1.3.5</a></dd>
+        
+          <dd><a href="/en/v1.3.4/">v1.3.4</a></dd>
+        
+          <dd><a href="/en/v1.3.3/">v1.3.3</a></dd>
+        
+          <dd><a href="/en/v1.3.1/">v1.3.1</a></dd>
+        
+          <dd><a href="/en/v1.3.0/">v1.3.0</a></dd>
+        
+          <dd><a href="/en/v1.3.0-rc.0/">v1.3.0-rc.0</a></dd>
+        
+          <dd><a href="/en/v1.2.11/">v1.2.11</a></dd>
+        
+          <dd><a href="/en/v1.2.10/">v1.2.10</a></dd>
+        
+          <dd><a href="/en/v1.2.10-rc.0/">v1.2.10-rc.0</a></dd>
+        
+          <dd><a href="/en/v1.2.9/">v1.2.9</a></dd>
+        
+          <dd><a href="/en/v1.2.9-rc.0/">v1.2.9-rc.0</a></dd>
+        
+          <dd><a href="/en/v1.2.8/">v1.2.8</a></dd>
+        
+          <dd><a href="/en/v1.2.8-rc.1/">v1.2.8-rc.1</a></dd>
+        
+          <dd><a href="/en/v1.2.8-rc.0/">v1.2.8-rc.0</a></dd>
+        
+          <dd><a href="/en/v1.2.7/">v1.2.7</a></dd>
+        
+          <dd><a href="/en/v1.2.7-rc.0/">v1.2.7-rc.0</a></dd>
+        
+          <dd><a href="/en/v1.2.6/">v1.2.6</a></dd>
+        
+          <dd><a href="/en/v1.2.5/">v1.2.5</a></dd>
+        
+          <dd><a href="/en/v1.2.5-rc.0/">v1.2.5-rc.0</a></dd>
+        
+          <dd><a href="/en/v1.2.4/">v1.2.4</a></dd>
+        
+          <dd><a href="/en/v1.2.3/">v1.2.3</a></dd>
+        
+          <dd><a href="/en/v1.2.2/">v1.2.2</a></dd>
+        
+          <dd><a href="/en/v1.2.1/">v1.2.1</a></dd>
+        
+          <dd><a href="/en/v1.2.0/">v1.2.0</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="//web3js.readthedocs.io/_/downloads/en/v1.7.3/pdf/">pdf</a></dd>
+        
+          <dd><a href="//web3js.readthedocs.io/_/downloads/en/v1.7.3/htmlzip/">html</a></dd>
+        
+          <dd><a href="//web3js.readthedocs.io/_/downloads/en/v1.7.3/epub/">epub</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>On Read the Docs</dt>
+          <dd>
+            <a href="//readthedocs.org/projects/web3js/?fromdocs=web3js">Project Home</a>
+          </dd>
+          <dd>
+            <a href="//readthedocs.org/builds/web3js/?fromdocs=web3js">Builds</a>
+          </dd>
+      </dl>
+      <hr/>
+      Free document hosting provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+
+    </div>
+  </div>
+
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+   
+
+</body>
+</html>
